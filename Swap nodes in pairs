@@ -1,0 +1,20 @@
+https://leetcode.com/problems/swap-nodes-in-pairs/
+
+ListNode* swap(ListNode* p){//each time we get three nodes we name them p1,p2,p3 assinged to three 
+        //consicutive node respectively 
+        if(!p||!p->next){//if there are only one node return 
+            return p;
+        }
+       ListNode* p1=p;//p1 assigned to the first node 
+       ListNode* p2=p1->next;//p2 assingend the second node
+      ListNode*  p3=p2->next;//p3 assigned the third node
+        p1->next=p3;//p1 address field assigned to the p3 node well temporarily
+        p2->next=p1;//p1  next filed assigned to firstnode address
+        if(p3!=NULL){
+            p1->next=swap(p3);//node p1 address will be assinged to swapped value of the next three //consicutive node 
+        }
+        return p2;
+    }
+    ListNode* swapPairs(ListNode* head) {
+        return swap(head);
+    }
