@@ -1,0 +1,19 @@
+//https://leetcode.com/problems/find-right-interval/
+
+vector<int> findRightInterval(vector<vector<int>>& in) {
+        int n=in.size();
+        map<int,int>m;
+        vector<int>v,ans(n,-1);
+        for(int i=0;i<n;i++){
+           m[in[i][0]]=i;
+            v.push_back(in[i][0]);
+        }
+        sort(v.begin(),v.end());
+        for(int i=0;i<n;i++){
+            auto it=lower_bound(v.begin(),v.end(),in[i][1])-v.begin();
+            if(it!=n){
+             ans[i]=m[v[it]] ;
+            }
+        }
+        return ans;
+    }
