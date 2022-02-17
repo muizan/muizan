@@ -1,0 +1,19 @@
+//https://leetcode.com/problems/sort-characters-by-frequency/
+
+string frequencySort(string s) {
+        int n=s.length();
+        map<char,string>cs;
+        for(int i=0;i<n;i++){
+            cs[s[i]]+=s[i];
+        }
+        priority_queue<pair<int,char>>p;
+        for(auto x:cs){
+            p.push({cs[x.first].size(),x.first});
+        }
+        string ans="";
+        while(!p.empty()){
+            ans+=cs[p.top().second];
+            p.pop();
+        }
+        return ans;
+    }
