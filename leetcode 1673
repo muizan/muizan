@@ -1,0 +1,21 @@
+    vector<int> mostCompetitive(vector<int>& nums, int k) {
+        int n=nums.size();
+        vector<int>ans(k);
+        stack<int>st;
+        st.push(nums[0]);
+        for(int i=1;i<n;i++){
+            while(!st.empty()&&(n-i+st.size()>k)&&st.top()>nums[i]){
+                st.pop();
+            }
+            st.push(nums[i]);
+        }
+        while(!st.empty()&&st.size()!=k){
+            st.pop();
+        }
+        int l=k-1;
+        while(!st.empty()){
+            ans[l--]=st.top();
+            st.pop();
+        }
+        return ans;
+    }
