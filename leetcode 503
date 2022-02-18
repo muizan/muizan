@@ -1,0 +1,16 @@
+ //https://leetcode.com/problems/next-greater-element-ii/
+ vector<int> nextGreaterElements(vector<int>& nums) {
+        int n=nums.size();
+        vector<int>ans(n,-1);
+        stack<int>st;
+        st.push(0);
+        for(int i=1;i<2*n;i++){
+            int in=(i)%n;
+          while(!st.empty()&&nums[st.top()]<nums[in]){
+            ans[st.top()]=nums[in];   
+            st.pop();
+        }  
+         st.push(in);
+        }
+       return ans; 
+    }
