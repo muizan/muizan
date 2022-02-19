@@ -1,0 +1,32 @@
+//https://leetcode.com/problems/n-queens/
+void solve(int col,vector<string>&board,vector<vector<string>>&ans,vector<int>&lr,vector<int>&ud,vector<int>&l_d,int n){
+        if(col==n){
+ans.push_back(board);
+        }
+        for(int row=0;row<n;row++){
+            int t=row+col;//every positive slope diagonal has the same sum so we can check when there is some element in a particula diagonal
+            int t2=n-1+col-row;//same for -ive slope diagonal 
+            if(lr[row]==0&&ud[t]==0&&l_d[t2]==0){
+                lr[row]=1;//we are making a row and a diagonal if there is some element in the diagonal
+                ud[t]=1;
+                l_d[t2]=1;
+                board[row][col]='Q';
+                solve(col+1,board,ans,lr,ud,l_d,n);
+                 lr[row]=0;//this is the backtraking step
+                ud[t]=0;
+                l_d[t2]=0;
+                board[row][col]='.';
+            }
+        }
+    }
+    vector<vector<string>> solveNQueens(int n) {
+     vector<vector<string>>ans;
+     vector<string>board;
+     string s(n,'.');
+     for(int i=0;i<n;i++){
+         board.push_back(s);
+     }
+     vector<int>lr(n,0),ud(2*n-1,0),l_d(2*n-1,0);
+     solve(0,board,ans,lr,ud,l_d,n);
+        return ans;
+    }
