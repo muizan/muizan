@@ -1,0 +1,19 @@
+   
+   int minSteps(string s, string t) {
+        int n=s.length();
+        vector<int>f(26);
+        for(auto x:s){
+            f[x-'a']++;
+        }
+        
+        for(auto x:t){
+            f[x-'a']--;
+        }
+        int cnt=0;
+        for(auto x:f){
+            if(x>0){
+                cnt+=x;
+            }
+        }
+        return cnt;
+    }
