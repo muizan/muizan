@@ -1,0 +1,27 @@
+  int minSubArrayLen(int target, vector<int>& nums) {
+        int n=nums.size();
+        int sum=0;
+        int i=0;
+        int ms=0,ans=0;
+        while(i<n&&sum<target){
+            sum+=nums[i++];
+            ms++;
+        }
+        if(i==n&&sum<target){return 0;}
+        ans=ms;
+        int l=i-1;
+        i=0;
+        while(l<n){
+            if(l<n-1){
+               sum+=nums[l+1];
+                  ms++;
+            }
+            while(i<=l&&sum-nums[i]>=target){
+                sum-=nums[i++];
+                ms--;
+            }
+            ans=min(ms,ans);
+            l++;
+        }
+        return ans;
+    }
