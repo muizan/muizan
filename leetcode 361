@@ -1,0 +1,26 @@
+  string smallestSubsequence(string s) {
+ vector<int>v(26);
+      map<char,bool>m;
+        for(auto x:s){
+            v[x-'a']++;
+        }
+        stack<char>st;
+        for(auto x:s){
+              if(m[x]==1){
+              v[x-'a']--;
+              continue;
+            }
+            while(!st.empty()&&v[st.top()-'a']>0&&st.top()>x){
+                m[st.top()]=0;
+                st.pop();
+            }
+            st.push(x); v[x-'a']--;
+            m[x]=1;
+        }
+        string ans="";
+        while(!st.empty()){
+            ans=st.top()+ans;
+            st.pop();
+        }
+        return ans;     
+    }
