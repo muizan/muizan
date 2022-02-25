@@ -1,0 +1,41 @@
+int help(int i,int j,vector<int>&fr,map<int,int>&m,int sum){
+        if(j==fr.size()){
+            return sum;
+        }
+        int temp=0;
+         while(j<fr.size()){
+            if(m.size()<=1){
+                m[fr[j++]]++;
+                ++sum;
+            }else{
+                break;
+            }
+        }
+        while(j<fr.size()){
+            if(m.find(fr[j])!=m.end()){
+                m[fr[j++]]++;
+                ++sum;
+            }else{
+                temp=sum;
+                break;
+            }
+        }
+        while(temp!=0&&m.size()!=1&&i<fr.size()){
+            --sum;
+            m[fr[i]]--;
+            if(m[fr[i]]==0){
+                m.erase(fr[i]);
+            }
+            ++i;
+        }
+        int ans=max(temp,help(i,j,fr,m,sum));
+        return ans;
+    }
+    int totalFruit(vector<int>& fr) {
+        int n=fr.size();
+        map<int,int>m;
+        int sum=0;
+        int i=0,j=0;
+       int fin=help(i,j,fr,m,sum);
+        return fin;
+    }
