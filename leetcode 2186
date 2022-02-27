@@ -1,0 +1,36 @@
+long long minimumTime(vector<int>& time, int tp) {
+     sort(time.begin(),time.end());
+     int n=time.size();
+    long long  var=time[0];
+   double val=var*tp;
+          if(n==1){
+            return val;
+        }
+    long long   low=time[0],high=val;
+        int ans=INT_MAX;
+     while(low<=high){
+        long long  mid=(low+high)/2;
+         cout<<mid<<" ";
+         long long int sum=0;
+         int i=0;
+         while(i<n){
+             if(mid/time[i]==0||sum>=tp){
+                 break;
+             }
+            long long  int temp=mid/time[i];
+             sum+=temp;
+             i++;
+         }
+         if(sum>=tp){
+                 high=mid-1;
+             }
+             else{
+                 low=mid+1;
+             }
+           if(sum>=tp&&ans>mid){
+             ans=mid;   
+     }
+        cout<<sum<<endl;
+     }
+        return ans;
+    }
