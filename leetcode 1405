@@ -1,0 +1,49 @@
+string longestDiverseString(int a, int b, int c) {
+        priority_queue<pair<int,char>>p;
+        if(a!=0){
+         p.push({a,'a'});   
+        }
+        if(b!=0){
+         p.push({b,'b'});   
+        }
+        if(c!=0){
+            p.push({c,'c'}); 
+        }
+        string ans="";
+        int i=0;
+            while(!p.empty()){
+                pair<int,char>val=p.top();
+                if(ans.length()>=2&&ans[i-1]==val.second&&ans[i-2]==val.second){//if length is greater than 1 we put one 
+                    p.pop();
+                    if(p.empty()){
+                        return ans;
+                    }
+                     ans+=p.top().second;
+                    pair<int,char>var=p.top();
+                    i++;   
+                    if(p.top().first==1){
+                      p.pop();
+                    }else{
+                         p.pop();
+                        p.push({var.first-1,var.second});
+                    }
+                    p.push(val); 
+                }
+                if(val.first>=2){//if top frequency is greater than 2 we push two at atime 
+                    ans+=val.second;
+                    ans+=val.second;
+                    if(val.first>2){
+                        p.pop();
+                      p.push({val.first-2,val.second}); 
+                    }else{
+                        p.pop();
+                    }
+                    i+=2;
+                }else{//else we push only one
+                  ans+=val.second;
+                   i++;
+                    p.pop();
+                }
+            }
+        return ans;
+    }
