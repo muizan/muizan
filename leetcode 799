@@ -1,0 +1,30 @@
+if(p==0){
+            return 0;
+        }
+        vector<vector<double>>v(0.0,vector<double>(qr+1));
+        v.push_back({(double)p});
+        int row=1;
+        while(row<=qr){
+            vector<double>ans(row+1);
+            for(int i=1;i<row;i++){
+                double var=v[row-1][i-1];
+                double var2=v[row-1][i];
+                if(var>1){
+                    ans[i]+=(double)(var-1)/2;
+                }
+                if(var2>1){
+                    ans[i]+=(double)(var2-1)/2;
+                }
+            }
+            if(v[row-1][0]>1){
+                 ans[0]=(v[row-1][0]-1)/2;
+            }
+            ans[row]=ans[0];
+            row++;
+            v.push_back(ans);
+        }
+        if(v[qr][qg]>=1){
+            return 1;
+        }
+        return v[qr][qg];
+    }
