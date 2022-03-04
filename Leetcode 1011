@@ -1,0 +1,39 @@
+int shipWithinDays(vector<int>& w, int days) {
+        int sum=0;
+        int mx=0;
+        for(auto x:w){
+            sum+=x;
+            mx=max(mx,x);
+        }
+        int low=0,high=sum;
+        while(low<=high){
+            int mid=(low+high)/2;
+            if(mid<mx){//if there is any element greater than mid then it would not be possible to shop so we have to increase the value 
+                low=mid+1;
+            }else{
+                 int temp=0;
+            int d=0;
+            for(int i=0;i<w.size();i++){
+                temp+=w[i];
+                if(temp>=mid){
+             if(temp==mid){
+                    temp=0;
+                }else{
+                      temp=w[i];   
+                     }
+                    ++d;
+                }
+                  
+                }
+             if(temp>0){
+                      ++d;
+                    }
+            if(d>days){
+                low=mid+1;
+            }else{
+                high=mid-1;
+            }
+            }  
+        }
+        return low;
+    }
