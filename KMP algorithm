@@ -1,0 +1,43 @@
+vector<int> help(string s){
+vector<int>ma(s.length(),-1);
+int i=0,j=1;
+while(j<s.length()){
+     if(s[i]==s[j]){
+       ma[j]=i;
+       i++;
+       j++;
+    }else if(i>0){
+     i=ma[i-1]+1;
+    }
+    else{
+    j++;
+    }
+}
+return ma;
+}
+bool valid(string ch,string to){
+ vector<int>pat=help(to);
+int i=0,j=0;
+while(i+to.length()-j<=ch.length()){
+    if(ch[i]==to[j]){
+        if(j==to.length()-1){
+            return true;
+        }
+        i++;
+        j++;
+    }else if(j>0){
+    j=pat[j-1]+1;
+    }else{
+    i++;
+    }
+}
+return false;
+}
+    string tostring(int n){//conversion of string into binary
+        string temp="";
+        if(n/2==0){
+            return to_string(n%2);
+        }
+        string t=tostring(n/2)+to_string(n%2);
+        return t;
+    }
