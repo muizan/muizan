@@ -1,0 +1,15 @@
+    int numSplits(string s) {
+        map<char,int>m,op;
+        int i=0;
+        vector<int>v(s.length());
+        for(auto x:s){
+            m[x]++;
+            v[i++]=m.size();
+        }
+        int cnt=0;
+        for(int i=s.length()-1;i>=0;i--){
+            op[s[i]]++;
+            if(i!=0&&op.size()==v[i-1]){cnt++;}
+        }
+        return cnt;
+    }
