@@ -1,0 +1,36 @@
+    int ma=0;
+    void help(string s,int k){
+        int n=s.length();
+        map<char,int>m;
+        for(auto x:s){
+            m[x]++;
+        }
+        string temp="";
+        map<char,int>tt;
+        for(auto x:s){
+            if(m[x]<k){
+                m.erase(x);
+                for(auto x:m){
+                    m[x.first]-=tt[x.first];
+                    if(m[x.first]==0){
+                        m.erase(x.first);
+                    }
+                    tt[x.first]=0;
+                }
+                if(temp.length()>=k){
+                    help(temp,k);
+                }
+                temp="";
+            }else{
+                tt[x]++;
+                temp+=x;
+            }
+        }
+        if(m.size()*k<=temp.length()){
+            ma=max(ma,(int)temp.length());
+        }
+    }
+    int longestSubstring(string s, int k) {
+         help(s,k);
+        return ma;
+    }
