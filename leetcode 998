@@ -1,0 +1,29 @@
+    string ans="";
+    void travel(TreeNode *p,string t){
+        if(p==NULL){return ;}
+        if(p->left==NULL&&p->right==NULL){//to check whether a node is a leaf or not
+            t+=p->val+97;//to add the leaf
+             reverse(t.begin(),t.end());//reversing the string its starts from the leaf
+            if(ans==""&&t.length()!=1){//for the first string and only 1 node case
+                ans=t;
+            }
+            else if(ans>t){//to update the smallest string 
+                ans=t;
+            }
+            return ;}
+        t+=97+(p->val);//adding elements one by one in preoder later we reverse it
+        travel(p->left,t);//preorder traversal
+        travel(p->right,t);
+    }
+    string smallestFromLeaf(TreeNode* root) {
+        if(root==NULL){
+            return "";
+        }
+        string t="";
+         if(root->left==NULL&&root->right==NULL){
+             t=root->val+97;
+            return t; 
+        }
+      travel(root,t);
+        return ans;
+    }
