@@ -1,0 +1,41 @@
+int maxChunksToSorted(vector<int>& arr) {
+      int n=arr.size();
+      stack<pair<int,int>>v;
+      v.push({0,arr[0]});
+        for(int i=1;i<arr.size();i++){
+            int first=min(i,arr[i]);
+            int second=max(i,arr[i]);
+            pair<int,int>val={first,second};
+            bool f=1,s=1,t=1;
+            int top=0;
+            if(!v.empty()&&val.first>=v.top().first&&val.second<=v.top().second){//inclusiveness
+                continue;
+            }
+            while(!v.empty()&&val.first<v.top().first&&val.second<v.top().second){//merging from left side
+                top=v.top().second;
+                v.pop();
+                f=0;
+            }
+            while(f&&!v.empty()&&val.first>v.top().first&&val.first<=v.top().second&&val.second>v.top().second){//merging from right side
+                top=v.top().first;
+                v.pop();
+                s=0;
+            }
+              while(s&&!v.empty()&&val.first<v.top().first&&val.second>v.top().second){//inclusive
+                  v.pop();
+                t=0;
+            }
+             if(f==0){
+              v.push({val.first,top});
+            }
+            else if(s==0){
+                 v.push({top,val.second});
+            }else if(t==0){
+               v.push(val); 
+            }
+            else{
+                    v.push(val);
+            }
+        }
+        return v.size();
+    }
