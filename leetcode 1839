@@ -1,0 +1,38 @@
+   //we will need cnt which keep track of the no of vowels appear in the window
+    //and a string which tell us what character we will need next
+    
+    int longestBeautifulSubstring(string word) {
+        string str="aeiou";
+        int ans=0;
+       int in=0;//to keep track of which vowel should appear next
+       int i=0,j=0;//sliding window end and start
+       int cnt=0;//to keep track of how much vowel have apperead
+        while(j<word.length()){
+            while(j<word.length()&&word[j]!='a'&&cnt==0){ 
+                //if no vowels have apperead then we will look for next a and start again
+                j++;
+                i++;
+            }
+            if(j>=word.length()){break;}//if there are no a remaining string
+            if(word[j]==str[in]){//if current char is equal to next required vowels 
+                cnt++;
+                j++;
+                in++;
+            }else if(j>0&&word[j]==word[j-1]){
+                //next can be equal to self eg.aaa is valid 
+                j++;
+            }else{//if previous conditions fails means we have to start again 
+                //so initailse cnt and in 
+                i=j;
+                cnt=0;
+                in=0;
+            }
+            if(cnt==5){// if all vowels have appered then run while  loop while char is u
+               while(j<word.length()&&word[j]=='u'){
+                   j++;
+               }
+                ans=max(ans,j-i);
+            }
+        }
+        return ans;
+    }
