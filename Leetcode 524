@@ -1,0 +1,24 @@
+  static bool compare(string a,string b){
+           if(a.length()==b.length()){
+               return a<b;
+           }
+            return a.length()>b.length();
+    }
+    string findLongestWord(string s, vector<string>& dic) {
+        sort(dic.begin(),dic.end(),compare);
+            for(auto x:dic){
+                int i=0,j=0;
+                while(i<x.length()&&j<s.length()){
+                    if(x[i]==s[j]){
+                        ++i;
+                        ++j;
+                    }else{
+                        ++j;
+                    }
+                }
+                if(i==x.length()){
+                    return x;
+                }
+            }
+        return "";
+    }
