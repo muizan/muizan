@@ -1,0 +1,28 @@
+  //sort them according to length if length are same then sort lexographically
+    static bool compare(string a,string b){
+        if(a.length()==b.length()){
+            return a<b;
+        }
+        return a.length()>b.length();
+    }
+    string longestWord(vector<string>& words) {
+        sort(words.begin(),words.end(),compare);
+        map<string,bool>m;
+        for(auto x:words){
+           m[x]=1;
+        }
+        for(auto x:words){
+            int s=x.length();
+            while(s){//we decrease the length one by one 
+                --s;
+                if(m[ x.substr(0,s)]==0){
+                   ////if any substring is not found then break and check for  another  string
+                    break;
+                }
+            }
+            if(s==0){//if any string if fully build then it is the answer because we have sort them accordingly
+                return x;
+            }
+        }
+        return "";
+    }
