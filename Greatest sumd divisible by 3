@@ -1,0 +1,15 @@
+ int maxSumDivThree(vector<int>& nums) {
+        int rem[]={0,0,0};//enters new largest sum according to remainder
+        int t[]={0,0,0};//keep track of the previous largest sums
+         for(int i=0;i<nums.size();i++){
+             for(int j=0;j<3;j++){
+                 int sum=t[j]+nums[i];
+                 rem[sum%3]=max(rem[sum%3],sum);
+             }
+              for(int i=0;i<3;i++){
+                  t[i]=rem[i];
+                  }
+         }
+     //remainder array will contain the largest no with remainder 0,1,2
+     return rem[0];
+    }
